@@ -3,7 +3,7 @@ import colors from '../colors/colors.style';
 
 
 export const CustomSection = styled.section`
-border: solid green;
+
 text-align: center;
 height: 8rem;
 padding:1rem;
@@ -59,6 +59,37 @@ color: ${colors.greyColor};
 justify-content: space-between;
 padding: 1rem;
 display: flex;
-width: 70%;
+width: 80%;
 margin: 0 auto;
+margin-top: 1rem;
+position: relative;
+`
+
+export const ButtonsTask = styled.div`
+
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+gap: .3rem;
+
+
+
+height: 100%;
+width: 10%;
+
+
+position: absolute;
+right: -5rem;
+top:.2rem;
+
+
+.btnTask {
+
+font-size: 1rem;
+cursor: pointer;
+
+ 
+}
+
 `

@@ -22,7 +22,7 @@ function List() {
 
   const[user, setUser]= useState('')
   const[users, setUsers] = useState([])
-
+  const[messageInput, setMessageInput] = useState('')
 
 
 
@@ -38,8 +38,13 @@ function List() {
       })
 
     }
-
+    
+     if(user.length === 0){
+      setMessageInput('escreva algo!')
+      return
+     }
      setUsers(prevUsers =>[...prevUsers, newUsers])
+     setMessageInput('')
      setUser('')
 
     
@@ -52,13 +57,15 @@ function List() {
 
   return(
     <CustomSection>
-        <h2> Task - Today </h2>
-       <input type="search" onChange={(e)=>setUser(e.target.value)} value={user} />
+        <h2> List </h2>
+       <input type="search" onChange={(e)=>setUser(e.target.value)} value={user} placeholder =" new user..." />
        <button onClick={handleUsers}>
-        add
-        <GrAdd/></button>
+          add
+         <GrAdd/>
+       </button>
+       <div className='messageInput'>{messageInput}</div>
        <C.Container>
-         {users.map(usuarios => <User name={usuarios.user} time={usuarios.time} />)}
+          {users.map(usuarios => <User name={usuarios.user} time={usuarios.time} />)}
        </C.Container>
     </CustomSection>
 
