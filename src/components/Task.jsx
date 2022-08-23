@@ -5,13 +5,13 @@ import {AiOutlineDelete,AiFillEdit} from 'react-icons/ai'
 
 import colors from '../colors/colors.style';
 
-import { ButtonsTask } from '../components/StylesComponents';
+import { ButtonsTask } from './StylesComponents';
 
-import * as C from '../components/StylesComponents'
+import * as C from './StylesComponents'
 
 
 
-const User = (props) => {
+const Task = (props) => {
 
 
     
@@ -35,4 +35,4 @@ const User = (props) => {
   )
 }
 
-export default User
+export default Task

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { CustomSection } from '../components/StylesComponents'
 //component
 import { MessageInput } from '../components/StylesComponents'
-import User from './User'
+import User from './Task'
 import * as C from '../components/StylesComponents'
 
 //styles
@@ -22,21 +22,21 @@ import colors from '../colors/colors.style.jsx';
 
 function List() {
 
-  const[user, setUser]= useState('')
-  const[users, setUsers] = useState([])
+  const[task, setTask]= useState('')
+  const[tasks, setTasks] = useState([])
   const[messageInput, setMessageInput] = useState('')
   const[edit,setEdit] = useState('')
   const[id, setId] = useState(0)
   
 
 
-  function handleUsers(){
+  function handleTasks(){
     
     setId(id+1)
   
 
-    const newUsers = {
-      user: user,
+    const newTask = {
+      task: task,
       id:id,
       time: new Date().toLocaleString('pt-br', {
         hour:'2-digit',
@@ -47,20 +47,20 @@ function List() {
 
     }
     
-     if(user.length === 0){
+     if(task.length === 0){
       setMessageInput('escreva algo!')
       return
      }
 
      //remove 
-     setUsers(prevUsers =>[...prevUsers, newUsers])
+     setTasks(prevTasks =>[...prevTasks, newTask])
      setMessageInput('')
-     setUser('')
+     setTask('')
     
   }
  
   const HandleRemove = (id) =>{
-    setUsers(users.filter(users => users.id != id))
+    setTasks(tasks.filter(tasks => tasks.id != id))
    }
 
   //edit
@@ -74,15 +74,15 @@ function List() {
 
   return(
     <CustomSection>
-        <h2>List</h2>
-       <input type="search" onChange={(e)=>setUser(e.target.value)} value={user} placeholder =" new user..." />
-       <button onClick={handleUsers}>
+        <h2>Task - Today</h2>
+       <input type="search" onChange={(e)=>setTask(e.target.value)} value={task} placeholder =" new task..." />
+       <button onClick={handleTasks}>
           add
          <GrAdd/>
        </button>
        <MessageInput >{messageInput}</MessageInput>
        <C.Container>
-          {users.map(usuarios => <User name={usuarios.user} key={usuarios.id} time={usuarios.time} id={usuarios.id}remove={(e) => HandleRemove(usuarios.id)} edit={handleEdit}/>)}
+          {tasks.map(tasks => <User name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} edit={handleEdit}/>)}
        </C.Container>
     </CustomSection>
    
