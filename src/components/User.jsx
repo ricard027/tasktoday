@@ -13,21 +13,20 @@ import * as C from '../components/StylesComponents'
 
 const User = (props) => {
 
-  const RemoveChild = (e) =>{
-    const parent =  e.target.parentElement;
+
     
-  }
+  
 
   return (
    
        <C.Card key={props.name}>
          
-          <strong className='name'>{props.name}</strong>
-          <p className='time'>{props.time}</p>
+          <p className='name'>{props.name}</p>
+          <span className='time'>{props.time}</span>
 
           <ButtonsTask>
-            <AiOutlineDelete className='btnTask' onClick={RemoveChild}/>
-            <AiFillEdit className='btnTask'/>
+            <AiOutlineDelete className='remove' onClick={props.remove}/>
+            <AiFillEdit className='edit' onClick={props.edit}/>
           </ButtonsTask>
          
   
