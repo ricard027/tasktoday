@@ -33,9 +33,9 @@ h2{
 input, button{
   border: none;
   margin:0 .2rem;
-  border-radius: .3rem;
+  border-radius: .7rem;
   width: 12rem;
-  padding: .5rem;
+  padding: .6rem;
 
  
 }
@@ -43,7 +43,7 @@ input, button{
 button{
  
  cursor: pointer;
- background-color:${colors.SecundaryColor};
+ background-color:${colors.LightColor};
  display: flex;
  align-itens: center;
  justify-content: space-between;
@@ -51,27 +51,44 @@ button{
  font-size: 1em;
  
 }
+button:hover{
+box-shadow: 1px 2px 10px #21786d;
+}
+.spanButton{
+ transition:  300ms;
+
+}
+
+
+button:active .spanButton{
+ transform:rotate(360deg)
+}
+
+input{
+  border: solid 1px #eee;
+}
 `
 
 
 export const Container = styled.ul`
-background-color:rgba(0,0,0,.1)};
+background-color:rgba(0,0,0,.3);
+
 padding: 2rem;
 margin: 3rem auto 0 auto;
-opacity: 90%;
-width: 70vw;
+min-width: 60vw;
 border-radius: .5rem;
 
 `;
 
 
 export const Card = styled.li`
-background-color: ${colors.greyColor};
+
+background-color: #fff;
 justify-content: space-between;
 align-items: center;
 padding: 1.5rem;
 display: flex;
-width: 80%;
+width: 70%;
 margin: 0 auto;
 margin-top: 1rem;
 border-radius:1rem;
@@ -100,22 +117,27 @@ gap: .5rem;
 
 
 height: 100%;
-width: 10%;
+width: 1%;
 
 
 
 
 
 .edit,.remove{
-opacity:80%;
-font-size: 1rem;
+
+transition:all .2s ease-in ;
+font-size: 1.6rem;
 cursor: pointer;
+
+border-radius:50%;
+padding:.3rem;
+opacity:80%;
 
 }
 
-.edit:hover{
+.edit:hover,.remove:hover{
 opacity:100%;
-color:${colors.PrimaryColor};
+background-color:#e3e9e5;
 }
 
 `

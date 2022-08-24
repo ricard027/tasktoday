@@ -4,16 +4,26 @@
     margin: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+    
 }
 body{
-    background-color: #333;
+background:url(../img/Checklist.jpg);
+background-size:contain;
+
 }
 
-.ModalReset{
-    background-color: red;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+
+.App{
+background-color: #fff;
+height: 12rem;
+}
+
+.toggler{
+    position: absolute;
+    top: 0;
+    right: 0;
+  
+ 
 }
 
 @keyframes animate{

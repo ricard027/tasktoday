@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { CustomSection } from '../components/StylesComponents'
 //component
 import { MessageInput } from '../components/StylesComponents'
-import User from './Task'
+import Task from './Task'
 import * as C from '../components/StylesComponents'
 
 //styles
@@ -74,15 +74,17 @@ function List() {
 
   return(
     <CustomSection>
+     <input type="radio" className='toggler' />
+       
         <h2>Task - Today</h2>
        <input type="search" onChange={(e)=>setTask(e.target.value)} value={task} placeholder =" new task..." />
        <button onClick={handleTasks}>
           add
-         <GrAdd/>
+         <GrAdd className='spanButton'/>
        </button>
        <MessageInput >{messageInput}</MessageInput>
        <C.Container>
-          {tasks.map(tasks => <User name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} edit={handleEdit}/>)}
+          {tasks.map(tasks => <Task name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} edit={handleEdit}/>)}
        </C.Container>
     </CustomSection>
    
