@@ -1,10 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { CustomSection } from '../components/StylesComponents'
+
 //component
+import image from '../img/tasksEmpty.png'
 import { MessageInput } from '../components/StylesComponents'
-import Task from './Task'
+import Task from './Task';
+import Modal from './Modal';
 import * as C from '../components/StylesComponents'
+
 
 //styles
 
@@ -27,14 +31,17 @@ function List() {
   const[messageInput, setMessageInput] = useState('')
   const[edit,setEdit] = useState('')
   const[id, setId] = useState(0)
+  const[modal,setModal]= useState(false);
   
-
+  const handleModal = ( tasksvalue) => {
+ 
+    setModal(!modal)
+  }
 
   function handleTasks(){
     
     setId(id+1)
   
-
     const newTask = {
       task: task,
       id:id,
@@ -53,6 +60,7 @@ function List() {
      }
 
      //remove 
+
      setTasks(prevTasks =>[...prevTasks, newTask])
      setMessageInput('')
      setTask('')
@@ -74,19 +82,28 @@ function List() {
 
   return(
     <CustomSection>
-     <input type="radio" className='toggler' />
        
-        <h2>Task - Today</h2>
-       <input type="search" onChange={(e)=>setTask(e.target.value)} value={task} placeholder =" new task..." />
+       <h2>Task - Today</h2>
+       <input type="search" onChange={(e)=>setTask(e.target.value)} value={task} placeholder =" new task..." className='inptAdd' />
        <button onClick={handleTasks}>
           add
          <GrAdd className='spanButton'/>
        </button>
        <MessageInput >{messageInput}</MessageInput>
+       <p className='currenty'>Currenty tasks: {tasks.length}</p>
+       <p>Tasks completed:?</p>
+
+
+       {tasks.length === 0? 
+          <img src={image} alt="image tasks empty" />:
        <C.Container>
-          {tasks.map(tasks => <Task name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} edit={handleEdit}/>)}
-       </C.Container>
-    </CustomSection>
+          {tasks.map(tasks => <Task name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} modal={()=> handleModal(tasks.task)}/>)
+        
+      }
+       </C.Container>}
+       {modal && <Modal tasks={tasks.task}/>}
+
+  </CustomSection>
    
 
   )}  

@@ -7,7 +7,6 @@
     
 }
 body{
-background:url(../img/Checklist.jpg);
 background-size:contain;
 
 }
@@ -18,13 +17,28 @@ background-color: #fff;
 height: 12rem;
 }
 
-.toggler{
-    position: absolute;
-    top: 0;
-    right: 0;
-  
- 
+.currenty{
+color: #ba9233;
+
 }
+
+
+.modal{
+    background-color:#eee;
+    position: fixed;
+    top: 30%;
+    height: 30vh;
+    width: 30vw;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 1px 1px 10px rgb(206, 201, 201);
+}
+
+
 
 @keyframes animate{
     from{
