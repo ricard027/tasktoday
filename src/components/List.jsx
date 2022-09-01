@@ -1,13 +1,13 @@
-import React from 'react'
-import { useState } from 'react'
-import { CustomSection } from '../components/StylesComponents'
+import React from 'react';
+import { useState } from 'react';
+import { CustomSection } from '../components/StylesComponents';
 
 //component
-import image from '../img/tasksEmpty.png'
-import { MessageInput } from '../components/StylesComponents'
+import image from '../img/tasksEmpty.png';
+import { MessageInput } from '../components/StylesComponents';
 import Task from './Task';
-import Modal from './Modal';
-import * as C from '../components/StylesComponents'
+import Modal  from '../components/Modal';
+import * as C from '../components/StylesComponents';
 
 
 //styles
@@ -29,14 +29,15 @@ function List() {
   const[task, setTask]= useState('')
   const[tasks, setTasks] = useState([])
   const[messageInput, setMessageInput] = useState('')
+
+
   const[edit,setEdit] = useState('')
   const[id, setId] = useState(0)
-  const[modal,setModal]= useState(false);
+  const[modal,setModal] = useState(false)
+  const[valueEdit, setValueEdit]= useState()
+
   
-  const handleModal = ( tasksvalue) => {
- 
-    setModal(!modal)
-  }
+  const[newId,setNewId]= useState()
 
   function handleTasks(){
     
@@ -71,39 +72,74 @@ function List() {
     setTasks(tasks.filter(tasks => tasks.id != id))
    }
 
+ 
+  //modal
+
+  const handleModal = (tasksvalue,id) =>{
+     setModal(!modal);
+     setValueEdit(tasksvalue)
+     setNewId(id)
+  }
+   
   //edit
 
-  const handleEdit = () =>{
+  const handleEdit = (newValue,currentId) => {
+    const totalTasks = [...tasks]
   
-
+    totalTasks.splice(currentId,1,{task:newValue,id:currentId})
+    setTasks(totalTasks)
+  
+  
   }
 
 
 
   return(
+
+
     <CustomSection>
-       
+
        <h2>Task - Today</h2>
-       <input type="search" onChange={(e)=>setTask(e.target.value)} value={task} placeholder =" new task..." className='inptAdd' />
+
+       <input type="search" 
+              onChange={(e)=>setTask(e.target.value)}
+              value={task}
+              placeholder =" new task..." className='inptAdd' />
+
        <button onClick={handleTasks}>
           add
          <GrAdd className='spanButton'/>
        </button>
+       
        <MessageInput >{messageInput}</MessageInput>
        <p className='currenty'>Currenty tasks: {tasks.length}</p>
        <p>Tasks completed:?</p>
+    
 
-
-       {tasks.length === 0? 
+     
+     { modal && <Modal open={handleModal} tasks={valueEdit} id={newId} handleEdit ={handleEdit}/>}
+       
+       {
+       
+       tasks.length === 0? 
           <img src={image} alt="image tasks empty" />:
        <C.Container>
-          {tasks.map(tasks => <Task name={tasks.task} key={tasks.id} time={tasks.time} id={tasks.id}remove={(e) => HandleRemove(tasks.id)} modal={()=> handleModal(tasks.task)}/>)
-        
+          {
+          tasks.map(tasks => <Task 
+                             name={tasks.task}
+                             key={tasks.id} 
+                             time={tasks.time} 
+                             id={tasks.id}
+                             remove={() => HandleRemove(tasks.id)}
+                             modal={()=> handleModal(tasks.task,tasks.id)}
+                              />
+                        )
       }
-       </C.Container>}
-       {modal && <Modal tasks={tasks.task}/>}
 
+       </C.Container>}
+   
   </CustomSection>
+  
    
 
   )}  

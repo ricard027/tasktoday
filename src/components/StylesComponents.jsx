@@ -186,6 +186,29 @@ background-color:rgba(0,0,0,0.1);
 color: green;
 
 }
-
 `
 ))
+
+export const CustomModal = styled.div`
+background-color: rgba(0,0,0,.2);
+position: fixed;
+top:0;
+width: 100%;
+height: 100vh;
+align-items: center;
+margin: 0 auto;
+display: flex;
+justify-content:center;
+z-index: 2;
+
+.modal{
+z-index: 3;
+
+}
+input{
+  outline: none;
+  padding:.5rem;
+  border-radius: .5rem;
+  border: none;
+}
+`
