@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import {CustomModal} from '../components/StylesComponents'
 
-const Modal = ({tasks,open,handleEdit,id}) => {
+const Modal = ({tasks,open,handleEdit,id,time}) => {
 
 
 const[newValue,setNewValue]= useState(tasks)
@@ -10,7 +10,7 @@ const[newValue,setNewValue]= useState(tasks)
 
 
 const ReplaceValue = () =>{
-  handleEdit(newValue,id)
+  handleEdit(newValue,id,time)
    open()
 }
 

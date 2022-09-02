@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { CustomSection } from '../components/StylesComponents';
-
+import  {Link} from 'react-router-dom'
 //component
 import image from '../img/tasksEmpty.png';
 import { MessageInput } from '../components/StylesComponents';
@@ -38,6 +38,7 @@ function List() {
 
   
   const[newId,setNewId]= useState()
+  const[newTime, setNewTime]= useState()
 
   function handleTasks(){
     
@@ -79,27 +80,30 @@ function List() {
      setModal(!modal);
      setValueEdit(tasksvalue)
      setNewId(id)
+     
   }
    
   //edit
 
-  const handleEdit = (newValue,currentId) => {
+  const handleEdit = (newValue,currentId,NewTime) => {
     const totalTasks = [...tasks]
   
-    totalTasks.splice(currentId,1,{task:newValue,id:currentId})
+    totalTasks.splice(currentId,1,{task:newValue,id:currentId,time:NewTime})
     setTasks(totalTasks)
   
   
   }
 
+  
+
 
 
   return(
-
-
+  
+   
     <CustomSection>
-
-       <h2>Task - Today</h2>
+    <h2>Task - Today</h2>
+     
 
        <input type="search" 
               onChange={(e)=>setTask(e.target.value)}
@@ -113,11 +117,11 @@ function List() {
        
        <MessageInput >{messageInput}</MessageInput>
        <p className='currenty'>Currenty tasks: {tasks.length}</p>
-       <p>Tasks completed:?</p>
+       <Link to='/TasksCompleted'>tasks completed</Link>
     
 
-     
-     { modal && <Modal open={handleModal} tasks={valueEdit} id={newId} handleEdit ={handleEdit}/>}
+  
+     { modal && <Modal open={handleModal} tasks={valueEdit} id={newId} handleEdit ={handleEdit} time={newTime}/>}
        
        {
        
@@ -131,7 +135,7 @@ function List() {
                              time={tasks.time} 
                              id={tasks.id}
                              remove={() => HandleRemove(tasks.id)}
-                             modal={()=> handleModal(tasks.task,tasks.id)}
+                             modal={()=> handleModal(tasks.task,tasks.id,setNewTime(tasks.time))}
                               />
                         )
       }
@@ -140,7 +144,7 @@ function List() {
    
   </CustomSection>
   
-   
+
 
   )}  
 
