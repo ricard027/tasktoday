@@ -10,10 +10,11 @@ function App() {
 
   return (
     <div className="App">
+   
       <BrowserRouter>
         <Routes>
-           <Route path='/' element={<List/>}/>
-          <Route path='/TasksCompleted' element={<TasksCompleted/>}/>
+           <Route path='/' element={<List />} />
+          <Route path='/TasksCompleted'element={<TasksCompleted/>}/>
         </Routes>
       
       </BrowserRouter>

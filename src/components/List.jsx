@@ -1,15 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { CustomSection } from '../components/StylesComponents';
-import  {Link} from 'react-router-dom'
+import  {useNavigate, Link} from 'react-router-dom'
+
 //component
 import image from '../img/tasksEmpty.png';
 import { MessageInput } from '../components/StylesComponents';
 import Task from './Task';
 import Modal  from '../components/Modal';
 import * as C from '../components/StylesComponents';
-
-
+import TasksCompleted from './TasksCompleted';
 //styles
 
 import styled from 'styled-components'
@@ -20,6 +20,8 @@ import {AiOutlineDelete,AiFillEdit} from 'react-icons/ai'
 // colors
 
 import colors from '../colors/colors.style.jsx';
+import { useEffect } from 'react';
+import { Toast } from 'bootstrap';
  
 
 
@@ -39,6 +41,10 @@ function List() {
   
   const[newId,setNewId]= useState()
   const[newTime, setNewTime]= useState()
+  
+  const total = [];
+  const qtdCompleted = [];
+
 
   function handleTasks(){
     
@@ -55,9 +61,9 @@ function List() {
       })
 
     }
-    
+      
      if(task.length === 0){
-      setMessageInput('escreva algo!')
+      setMessageInput('write something!')
       return
      }
 
@@ -86,22 +92,51 @@ function List() {
   //edit
 
   const handleEdit = (newValue,currentId,NewTime) => {
+
+
     const totalTasks = [...tasks]
-  
     totalTasks.splice(currentId,1,{task:newValue,id:currentId,time:NewTime})
     setTasks(totalTasks)
+
   
   
   }
 
-  
+  //completed
 
+  const isCompleted = (completed) =>{
+
+    const  complete = tasks.filter(tasks => tasks.id === completed.id )
+
+      for(let i of complete){
+
+      total.push(i) 
+      
+     }
+
+
+     //setTasks([tasks.id!==complete.id])
+
+   }
+
+
+
+ const navigate = useNavigate()
+
+ const handleNavigate = () => {
+
+   
+   navigate('/TasksCompleted',{
+    state:{
+           completed:[...total] }
+      })
+ }
 
 
   return(
   
    
-    <CustomSection>
+    <CustomSection >
     <h2>Task - Today</h2>
      
 
@@ -110,14 +145,18 @@ function List() {
               value={task}
               placeholder =" new task..." className='inptAdd' />
 
-       <button onClick={handleTasks}>
+       <button onClick={handleTasks} className='add'>
           add
          <GrAdd className='spanButton'/>
        </button>
        
        <MessageInput >{messageInput}</MessageInput>
        <p className='currenty'>Currenty tasks: {tasks.length}</p>
-       <Link to='/TasksCompleted'>tasks completed</Link>
+    
+        <button onClick={()=> handleNavigate()} className='completed'>Completed Tasks 
+        <span className='qtd'>{qtdCompleted.length}</span>
+        </button>
+       
     
 
   
@@ -129,7 +168,9 @@ function List() {
           <img src={image} alt="image tasks empty" />:
        <C.Container>
           {
-          tasks.map(tasks => <Task 
+          tasks.map(tasks => <Task
+                             
+                             isCompleted={isCompleted}
                              name={tasks.task}
                              key={tasks.id} 
                              time={tasks.time} 

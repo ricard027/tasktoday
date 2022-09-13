@@ -40,7 +40,7 @@ h2{
  
 }
 
-button{
+.add{
  
  cursor: pointer;
  background-color:${colors.LightColor};
@@ -51,7 +51,8 @@ button{
  font-size: 1em;
  
 }
-button:hover{
+
+.add:hover{
 box-shadow: 1px 2px 10px #21786d;
 }
 .spanButton{
@@ -67,6 +68,31 @@ button:active .spanButton{
 .inptAdd{
   border: solid 1px #eee;
 }
+
+.completed{
+  heigth:18px;
+  font-size:.9rem;
+  cursor: pointer;
+  border-radius:.3rem;
+  background-color:rgba(0,0,0,.03);
+  color:${colors.SecundaryColor};
+  position:relative;
+  
+  .qtd{
+    background-color:${colors.SecundaryColor};
+    box-shadow:.1rem .1rem 1rem ${colors.SecundaryColor};
+    border-radius:50%;
+    
+    position:absolute;
+    padding:.2rem;
+    font-size:.5rem;
+    top:0;
+    right:0;
+    color:#fff;
+    opacity:90%;
+  }
+}
+
 `
 
 

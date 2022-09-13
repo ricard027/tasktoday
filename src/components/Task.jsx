@@ -16,16 +16,22 @@ const Task = (props) => {
 
    const[ischeked, setIsChecked]= useState(false)
    
-
-   const handleClick =()=> {
+   
+ //modal
+   const activeModal =()=> {
      props.modal()
    }
+  
+
 
   return (
    
        <C.Card key={props.name} done={ischeked}>
-         
+          
           <input type="checkbox"
+           onClick={()=> props.isCompleted({name: props.name,
+                                            time:props.time, 
+                                            id: props.id})}
            checked={ischeked}
            onChange={(e)=>setIsChecked(e.target.checked)}
            />
@@ -38,8 +44,18 @@ const Task = (props) => {
           {/* Buttons */}
 
           <C.ButtonsTask done={ischeked}>
+            {/* remove */}
+
             <AiOutlineDelete className='remove' onClick={props.remove}/>
-            <AiFillEdit className='edit' onClick={()=>handleClick()}/>
+
+            {/* remove */}
+
+            {/* edit*/}
+            
+            <AiFillEdit className='edit'onClick={()=>activeModal()}/>
+
+            {/* edit*/}
+
           </C.ButtonsTask>
         
        </C.Card>
