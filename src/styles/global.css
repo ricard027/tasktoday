@@ -1,16 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=News+Cycle&family=Roboto+Flex:opsz,wght@8..144,200;8..144,300&display=swap');
+
 *{
     list-style: none;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+   
     
 }
 body{
 background-size:contain;
-
+font-family: 'News Cycle', sans-serif;
 }
-
 
 .App{
 background-color: #fff;
@@ -21,6 +22,7 @@ height: 12rem;
 color: #ba9233;
 
 }
+
 
 
 

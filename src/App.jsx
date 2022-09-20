@@ -3,7 +3,7 @@ import  List  from './components/List'
 import './styles/global.css'
 import{BrowserRouter,Routes,Route,Link} from 'react-router-dom'
 import TasksCompleted from './components/TasksCompleted';
-
+import Page404 from './components/Page404';
 
 function App() {
 
@@ -13,6 +13,7 @@ function App() {
    
       <BrowserRouter>
         <Routes>
+           <Route path='*' element={<Page404/>}/>
            <Route path='/' element={<List />} />
           <Route path='/TasksCompleted'element={<TasksCompleted/>}/>
         </Routes>

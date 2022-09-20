@@ -12,7 +12,7 @@ color: #A74D3E;
 opacity:90%;
 `
 
-export const CustomSection = styled.section`
+export const CustomSection = styled.section(()=> (`
 
 text-align: center;
 height: 10rem;
@@ -49,6 +49,7 @@ h2{
  justify-content: space-between;
  gap: .2rem;
  font-size: 1em;
+ transition: 300ms;
  
 }
 
@@ -77,23 +78,35 @@ button:active .spanButton{
   background-color:rgba(0,0,0,.03);
   color:${colors.SecundaryColor};
   position:relative;
-  
+
+
   .qtd{
+ 
     background-color:${colors.SecundaryColor};
-    box-shadow:.1rem .1rem 1rem ${colors.SecundaryColor};
     border-radius:50%;
-    
     position:absolute;
+    display: none;
     padding:.2rem;
     font-size:.5rem;
-    top:0;
-    right:0;
+    top:-0.7rem;
+    right:-0.1rem;
     color:#fff;
+    border:solid #fff;
+
+  &.active{
+    
+    display: block;
     opacity:90%;
+    padding:.4rem;
+
   }
+    
+ }
+
 }
 
 `
+))
 
 
 export const Container = styled.ul`
@@ -130,7 +143,7 @@ box-shadow: .2rem .2rem 1rem #eee;
 justify-content: space-between;
 align-items: center;
 padding: 1.1rem;
-display: flex;
+display:flex;
 
 width:70%;
 margin: 0 auto;

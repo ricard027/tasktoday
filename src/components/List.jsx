@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState} from 'react';
 import { CustomSection } from '../components/StylesComponents';
 import  {useNavigate, Link} from 'react-router-dom'
 
@@ -21,7 +21,6 @@ import {AiOutlineDelete,AiFillEdit} from 'react-icons/ai'
 
 import colors from '../colors/colors.style.jsx';
 import { useEffect } from 'react';
-import { Toast } from 'bootstrap';
  
 
 
@@ -42,8 +41,12 @@ function List() {
   const[newId,setNewId]= useState()
   const[newTime, setNewTime]= useState()
   
-  const total = [];
-  const qtdCompleted = [];
+  const totalCompleted = [];
+  let qtdCompleted = []
+   
+  
+
+
 
 
   function handleTasks(){
@@ -92,7 +95,7 @@ function List() {
   //edit
 
   const handleEdit = (newValue,currentId,NewTime) => {
-
+    
 
     const totalTasks = [...tasks]
     totalTasks.splice(currentId,1,{task:newValue,id:currentId,time:NewTime})
@@ -102,23 +105,35 @@ function List() {
   
   }
 
+
+
   //completed
 
+
+  
+
+
   const isCompleted = (completed) =>{
+    
+     //   !!PENDENCIAS!!
 
+     //refazer a lista após completar as tasks, copiando as tasks completas 
+     //e as enviando como props e deletar da currenty
+    
     const  complete = tasks.filter(tasks => tasks.id === completed.id )
-
-      for(let i of complete){
-
-      total.push(i) 
-      
+ 
+     for(let i of complete){
+         totalCompleted.push([i])
      }
 
-
-     //setTasks([tasks.id!==complete.id])
-
+    
+     qtdCompleted = [...totalCompleted]
+     const qtd = document.querySelector('.qtd')
+     qtd.classList.add('active')
+     qtd.innerText = qtdCompleted.length;
+     
+      
    }
-
 
 
  const navigate = useNavigate()
@@ -128,15 +143,16 @@ function List() {
    
    navigate('/TasksCompleted',{
     state:{
-           completed:[...total] }
+           completed:[...totalCompleted] }
       })
  }
 
+ // instalar a lib react-toastfy pra adicionar pop ups com menssagens
 
   return(
   
    
-    <CustomSection >
+    <CustomSection qtdCompleted={qtdCompleted}>
     <h2>Task - Today</h2>
      
 
@@ -154,7 +170,7 @@ function List() {
        <p className='currenty'>Currenty tasks: {tasks.length}</p>
     
         <button onClick={()=> handleNavigate()} className='completed'>Completed Tasks 
-        <span className='qtd'>{qtdCompleted.length}</span>
+        <span className='qtd'></span>
         </button>
        
     

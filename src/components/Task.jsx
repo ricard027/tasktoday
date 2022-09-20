@@ -29,9 +29,7 @@ const Task = (props) => {
        <C.Card key={props.name} done={ischeked}>
           
           <input type="checkbox"
-           onClick={()=> props.isCompleted({name: props.name,
-                                            time:props.time, 
-                                            id: props.id})}
+           onClick={()=> props.isCompleted(props)}
            checked={ischeked}
            onChange={(e)=>setIsChecked(e.target.checked)}
            />

@@ -9,13 +9,8 @@ const TasksCompleted = () => {
   //completed
   
   const location = useLocation().state.completed;
-
+  const complete = [...location]
   console.log('is location:', location)
- 
-
-
- 
-
 
 
   return (
@@ -23,12 +18,12 @@ const TasksCompleted = () => {
         <Link to='/'>
           <AiOutlineArrowLeft className='previousButton'/>
         </Link>
-        <h3>Completed Tasks
+        <h3>Completed Tasks{complete.length}
          <AiTwotoneTrophy className='completedIcon'/>
         </h3>
         <ul>
 
-        {location.map(task => 
+        {complete.map(task => 
 
         <li key={task.id}>
           <p>{task.task}</p>
