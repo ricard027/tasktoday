@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CustomSection } from '../components/StylesComponents';
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios';
@@ -24,7 +24,6 @@ import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
 // colors
 
 import colors from '../colors/colors.style.jsx';
-import { useEffect } from 'react';
 
 
 
@@ -49,29 +48,30 @@ function List() {
   let qtdCompleted = []
 
 
-  const saveTasks = async(props)=>{
+  const saveTasks = async()=>{
 
     await axios.post("https://fsc-task-manager-backend.herokuapp.com/tasks",{
     description: task,
     isCompleted:false,
     
+   
+    
   })
 }
-
-
   const fetchTasks = async () => {
 
     try {
 
-      const response = await axios.get("https://fsc-task-manager-backend.herokuapp.com/tasks")
-       setTasks([...response.data])
-  
-      
+      const {data} = await axios.get("https://fsc-task-manager-backend.herokuapp.com/tasks")
+      console.log(data)
+   
+
+       setTasks([...data])
     
     }
 
     catch(error) {
-
+      console.log(error)
     }
 
   }
@@ -87,13 +87,13 @@ function List() {
 const handleTasks = async ()=> {
       
    
- 
 
+  
     setId(id + 1)
 
     const newTask = {
-      task: task,
-      id: id,
+      description: task,
+       id:task._id,
       time: new Date().toLocaleString('pt-br', {
         hour: '2-digit',
         minute: '2-digit',
@@ -114,21 +114,26 @@ const handleTasks = async ()=> {
     setTasks(prevTasks => [...prevTasks, newTask])
     setMessageInput('')
     setTask('')
-
+   
     try{
-      
       await saveTasks()
     }
     catch(error){
 
     }
 
+    
   }
 
   //remove 
 
-  const HandleRemove = (id) => {
-    setTasks(tasks.filter(tasks => tasks.id != id))
+  const HandleRemove = async(id) => {
+    
+   const deleted = await axios.delete(`https://fsc-task-manager-backend.herokuapp.com/tasks/${id}`);
+   const filtered = tasks.filter(tasks => tasks!=deleted)
+   setTasks(filtered)
+   fetchTasks()
+
   }
 
 
@@ -164,10 +169,6 @@ const handleTasks = async ()=> {
 
   const isCompleted = (completed) => {
 
-    //   !!PENDENCIAS!!
-
-    //refazer a lista após completar as tasks, copiando as tasks completas 
-    //e as enviando como props e deletar da currenty
 
     const complete = tasks.filter(tasks => tasks.id === completed.id)
 
@@ -237,11 +238,11 @@ const handleTasks = async ()=> {
               tasks.map(tasks => <Task
 
                 isCompleted={isCompleted}
-                name={tasks.task}
-                key={tasks.id}
+                name={tasks.description}
+                key={tasks._id}
                 time={tasks.time}
                 id={tasks.id}
-                remove={() => HandleRemove(tasks.id)}
+                remove={() => HandleRemove(tasks._id)}
                 modal={() => handleModal(tasks.task, tasks.id, setNewTime(tasks.time))}
               />
               )

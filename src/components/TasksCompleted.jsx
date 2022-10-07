@@ -18,7 +18,7 @@ const TasksCompleted = () => {
         <Link to='/'>
           <AiOutlineArrowLeft className='previousButton'/>
         </Link>
-        <h3>Completed Tasks{complete.length}
+        <h3>Completed Tasks
          <AiTwotoneTrophy className='completedIcon'/>
         </h3>
         <ul>
