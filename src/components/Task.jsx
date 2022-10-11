@@ -32,7 +32,7 @@ const Task = (props) => {
 
   return (
    
-       <C.Card key={props.name} done={ischeked}>
+       <C.Card key={props.name} done={ischeked}>c
           <input type="checkbox"
            checked={ischeked}
            onChange={(e)=>onChange(e.target.checked)}

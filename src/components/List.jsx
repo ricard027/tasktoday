@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { CustomSection } from '../components/StylesComponents';
-import { useNavigate, Link } from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 import axios from 'axios';
 
 //component
@@ -184,6 +184,7 @@ const handleTasks = async ()=> {
 
   }
 
+  /*
 
   const navigate = useNavigate()
 
@@ -198,7 +199,7 @@ const handleTasks = async ()=> {
   }
 
   // instalar a lib react-toastfy pra adicionar pop ups com menssagens
-
+ */
   return (
 
 
@@ -219,9 +220,9 @@ const handleTasks = async ()=> {
       <MessageInput >{messageInput}</MessageInput>
       <p className='currenty'>Currenty tasks: {tasks.length}</p>
 
-      <button onClick={() => handleNavigate()} className='completed'>Completed Tasks
-        <span className='qtd'></span>
-      </button>
+      <Link className='completed' to='/TasksCompleted'>Completed Tasks
+      <span className='qtdCompleted'>+99</span>
+      </Link>
 
 
 

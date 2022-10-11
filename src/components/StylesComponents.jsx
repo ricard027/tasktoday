@@ -54,52 +54,53 @@ h2{
 }
 
 .add:hover{
+
 box-shadow: 1px 2px 10px #21786d;
+
 }
+
 .spanButton{
+
  transition:  300ms;
 
 }
 
 
 button:active .spanButton{
- transform:rotate(360deg)
+
+ transform:rotate(360deg);
+
 }
 
 .inptAdd{
+
   border: solid 1px #eee;
+
 }
 
 .completed{
+  margin-top:.5rem;
   heigth:18px;
   font-size:.9rem;
+  text-decoration:none;
   cursor: pointer;
   border-radius:.3rem;
   background-color:rgba(0,0,0,.03);
   color:${colors.SecundaryColor};
   position:relative;
+  padding:.5rem;
 
-
-  .qtd{
- 
+  .qtdCompleted{
+    
     background-color:${colors.SecundaryColor};
     border-radius:50%;
     position:absolute;
-    display: none;
     padding:.2rem;
     font-size:.5rem;
     top:-0.7rem;
     right:-0.1rem;
     color:#fff;
     border:solid #fff;
-
-  &.active{
-    
-    display: block;
-    opacity:90%;
-    padding:.4rem;
-
-  }
     
  }
 
@@ -168,7 +169,13 @@ input{
   width:1.2rem;
   height:1.2rem;
   z-index:1;
+  position:absolute;
+ 
 }
+
+
+
+
 
 label{
   text-wrap:wrap;
