@@ -21,17 +21,21 @@ const Task = (props) => {
    const activeModal =()=> {
      props.modal()
    }
-  
+
+ //onchange checkbox
+
+ const onChange = (value) => {
+  props.isCompleted(props)
+  setIsChecked(value)
+ }
 
 
   return (
    
        <C.Card key={props.name} done={ischeked}>
-          
           <input type="checkbox"
-           onClick={()=> props.isCompleted(props)}
            checked={ischeked}
-           onChange={(e)=>setIsChecked(e.target.checked)}
+           onChange={(e)=>onChange(e.target.checked)}
            />
 
           

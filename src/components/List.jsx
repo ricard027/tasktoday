@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 import { useState, useEffect } from 'react';
 import { CustomSection } from '../components/StylesComponents';
@@ -36,7 +36,6 @@ function List() {
 
 
   const [edit, setEdit] = useState('')
-  const [id, setId] = useState(0)
   const [modal, setModal] = useState(false)
   const [valueEdit, setValueEdit] = useState()
 
@@ -44,8 +43,8 @@ function List() {
   const [newId, setNewId] = useState()
   const [newTime, setNewTime] = useState()
 
-  const totalCompleted = [];
-  let qtdCompleted = []
+  //const totalCompleted = [];
+  //let qtdCompleted = []
 
 
   const saveTasks = async()=>{
@@ -63,7 +62,7 @@ function List() {
     try {
 
       const {data} = await axios.get("https://fsc-task-manager-backend.herokuapp.com/tasks")
-      console.log(data)
+      
    
 
        setTasks([...data])
@@ -89,12 +88,12 @@ const handleTasks = async ()=> {
    
 
   
-    setId(id + 1)
+
 
     const newTask = {
       description: task,
        id:task._id,
-      time: new Date().toLocaleString('pt-br', {
+       time: new Date().toLocaleString('pt-br', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -168,8 +167,8 @@ const handleTasks = async ()=> {
 
 
   const isCompleted = (completed) => {
-
-
+  console.log(completed)
+    /*
     const complete = tasks.filter(tasks => tasks.id === completed.id)
 
     for (let i of complete) {
@@ -181,7 +180,7 @@ const handleTasks = async ()=> {
     const qtd = document.querySelector('.qtd')
     qtd.classList.add('active')
     qtd.innerText = qtdCompleted.length;
-
+*/
 
   }
 
@@ -193,7 +192,7 @@ const handleTasks = async ()=> {
 
     navigate('/TasksCompleted', {
       state: {
-        completed: [...totalCompleted]
+        completed: [...isCompleted]
       }
     })
   }
@@ -203,7 +202,7 @@ const handleTasks = async ()=> {
   return (
 
 
-    <CustomSection qtdCompleted={qtdCompleted}>
+    <CustomSection /*qtdCompleted={qtdCompleted*/>
       <h2>Task - Today</h2>
 
 
