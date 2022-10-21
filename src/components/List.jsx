@@ -166,44 +166,26 @@ const handleTasks = async ()=> {
 
 
 
-  const isCompleted = (completed) => {
-  console.log(completed)
-    /*
-    const complete = tasks.filter(tasks => tasks.id === completed.id)
-
-    for (let i of complete) {
-      totalCompleted.push([i])
+  const isCompleted =  async (completed) => {
+  
+    try{
+      await axios.patch(`https://fsc-task-manager-backend.herokuapp.com/tasks/${completed._id}`);
+      
+      fetchTasks()
     }
+     catch(error){
 
-
-    qtdCompleted = [...totalCompleted]
-    const qtd = document.querySelector('.qtd')
-    qtd.classList.add('active')
-    qtd.innerText = qtdCompleted.length;
-*/
-
+     }
   }
 
-  /*
-
-  const navigate = useNavigate()
-
-  const handleNavigate = () => {
-
-
-    navigate('/TasksCompleted', {
-      state: {
-        completed: [...isCompleted]
-      }
-    })
-  }
+  
 
   // instalar a lib react-toastfy pra adicionar pop ups com menssagens
- */
+
   return (
 
 
-    <CustomSection /*qtdCompleted={qtdCompleted*/>
+    <CustomSection >
       <h2>Task - Today</h2>
 
 
@@ -221,7 +203,7 @@ const handleTasks = async ()=> {
       <p className='currenty'>Currenty tasks: {tasks.length}</p>
 
       <Link className='completed' to='/TasksCompleted'>Completed Tasks
-      <span className='qtdCompleted'>+99</span>
+      <span className={tasks.length===0?'none':'qtdCompleted'}>{tasks.length}</span>
       </Link>
 
 
@@ -248,8 +230,11 @@ const handleTasks = async ()=> {
               )
             }
 
-          </C.Container>}
+          
 
+          </C.Container>
+          }
+      
     </CustomSection>
 
 

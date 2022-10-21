@@ -22,6 +22,10 @@ height: 12rem;
 color: #ba9233;
 
 }
+.none{
+transition:.3s;
+display: none;
+}
 
 
 

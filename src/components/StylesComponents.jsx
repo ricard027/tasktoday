@@ -24,6 +24,7 @@ gap: .5rem;
 
 
 
+
 h2{
   font-size:2rem;
   color:${colors.SecundaryColor};
@@ -96,9 +97,8 @@ button:active .spanButton{
     border-radius:50%;
     position:absolute;
     padding:.2rem;
-    font-size:.5rem;
-    top:-0.7rem;
-    right:-0.1rem;
+    font-size:.4em;
+    top:-.1rem;
     color:#fff;
     border:solid #fff;
     
