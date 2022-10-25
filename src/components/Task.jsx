@@ -1,67 +1,55 @@
-import {AiOutlineDelete,AiFillEdit} from 'react-icons/ai'
+import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
 
-//styles
+// styles
 
-import colors from '../colors/colors.style';
 import * as C from './StylesComponents'
 
-
-//hooks
-import { useState } from 'react';
-
-
-
+// hooks
+import { useState } from 'react'
 
 const Task = (props) => {
+  const [ischeked, setIsChecked] = useState(false)
 
-   const[ischeked, setIsChecked]= useState(false)
-   
-   
- //modal
-   const activeModal =()=> {
-     props.modal()
-   }
+  // modal
+  const activeModal = () => {
+    props.modal()
+  }
 
- //onchange checkbox
+  // onchange checkbox
 
- const onChange = (value) => {
-  props.isCompleted(props)
-  setIsChecked(value)
- }
-
+  const onChange = (value) => {
+    props.isCompleted(props)
+    setIsChecked(value)
+  }
 
   return (
-   
-       <C.Card key={props.name} done={ischeked}>c
-          <input type="checkbox"
-           checked={ischeked}
-           onChange={(e)=>onChange(e.target.checked)}
-           />
+    <C.Card key={props.name} done={ischeked}>
+      c
+      <input
+        type="checkbox"
+        checked={ischeked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <label className="name">{props.name}</label>
+      <span className="time">{props.time}</span>
+      {/* Buttons */}
+      <C.ButtonsTask done={ischeked}>
+        {/* remove */}
 
-          
-          <label className='name'>{props.name}</label>
-          
-          <span className='time'>{props.time}</span>
+        <AiOutlineDelete
+          className="remove"
+          onClick={() => props.remove(props._idj)}
+        />
 
-          {/* Buttons */}
+        {/* remove */}
 
-          <C.ButtonsTask done={ischeked}>
-            {/* remove */}
+        {/* edit */}
 
-            <AiOutlineDelete className='remove' onClick={props.remove}/>
+        <AiFillEdit className="edit" onClick={() => activeModal()} />
 
-            {/* remove */}
-
-            {/* edit*/}
-            
-            <AiFillEdit className='edit'onClick={()=>activeModal()}/>
-
-            {/* edit*/}
-
-          </C.ButtonsTask>
-        
-       </C.Card>
-
+        {/* edit */}
+      </C.ButtonsTask>
+    </C.Card>
   )
 }
 

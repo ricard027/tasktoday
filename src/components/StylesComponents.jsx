@@ -1,18 +1,17 @@
-import styled from 'styled-components';
-import colors from '../colors/colors.style';
+import styled from 'styled-components'
+import colors from '../colors/colors.style'
 
 export const MessageInput = styled.span`
+  height: 2rem;
+  text-align: center;
 
-
-height: 2rem;
-text-align: center;
-
-font-size: 1.2rem;
-color: #A74D3E;
-opacity:90%;
+  font-size: 1.2rem;
+  color: #a74d3e;
+  opacity: 90%;
 `
 
-export const CustomSection = styled.section(()=> (`
+export const CustomSection = styled.section(
+  () => `
 
 text-align: center;
 height: 10rem;
@@ -107,32 +106,30 @@ button:active .spanButton{
 }
 
 `
-))
-
+)
 
 export const Container = styled.ul`
-background-color:rgba(0,0,0,0.020);
+  background-color: rgba(0, 0, 0, 0.02);
 
-padding: 2rem;
-margin: 3rem auto 0 auto;
-min-width: 60vw;
-border-radius: 1rem;
-
-`;
-
-
-export const Card = styled.li(({done})=> (
+  padding: 2rem;
+  margin: 3rem auto 0 auto;
+  min-width: 60vw;
+  border-radius: 1rem;
 `
+
+export const Card = styled.li(
+  ({ done }) =>
+    `
 &:after{
   content:'';
-  background-color:${done?colors.SecundaryColor:'#fff'};
-  width:${done?'100%':'0'};
+  background-color:${done ? colors.SecundaryColor : '#fff'};
+  width:${done ? '100%' : '0'};
   height:100%;
   position:absolute;
   top:0;
   left:0;
   bottom:0;
-  opacity:${done?'50%':'0%'};
+  opacity:${done ? '50%' : '0%'};
   border-radius:1rem;
   transition:ease-in-out .3s;
 
@@ -179,18 +176,17 @@ input{
 
 label{
   text-wrap:wrap;
-  text-decoration:${done?'line-through':'initial'};
+  text-decoration:${done ? 'line-through' : 'initial'};
   font-size: 1.2rem;
-  color:${done?'#000':'#333'};
+  color:${done ? '#000' : '#333'};
   
 }
 `
-))
+)
 
-
-
-export const ButtonsTask = styled.div(({done})=>(
-  `
+export const ButtonsTask = styled.div(
+  ({ done }) =>
+    `
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;
@@ -232,97 +228,87 @@ color: green;
 
 }
 `
-))
+)
 
 export const CustomModal = styled.div`
-background-color: rgba(0,0,0,.2);
-position: fixed;
-top:0;
-width: 100%;
-height: 100vh;
-align-items: center;
-margin: 0 auto;
-display: flex;
-justify-content:center;
-z-index: 2;
-
-.modal{
-z-index: 3;
-
-}
-input{
-  outline: none;
-  padding:.5rem;
-  border-radius: .5rem;
-  border: none;
-}
-`
-export const CompletedTasks = styled.section`
-
-width: 60vw;
-height: 100vh;
-margin: 0 auto;
-border-radius: .2rem;
-padding:1rem;
-
-
-.previousButton{
-  text-decoration: none;
-  color:#333;
-  font-size:1.5rem;
-  opacity:50%;
-  border-radius:50%;
-  width:1.5rem;
-  height:1.5rem;
-  transition: .3s;
-  margin-left: 15%;
-
-  &:hover{
-    background-color:rgba(0,0,0,0.1);
-    color:#000;
-    opacity:100%;
-  }
-
- }
-
-
- h3{
-  color:${colors.PrimaryColor};
-  text-align: center;
-  padding:1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap:.5rem;
-  margin: 0 auto;
+  z-index: 2;
 
-  & .completedIcon{
-   
+  .modal {
+    z-index: 3;
   }
-}
+  input {
+    outline: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+  }
+`
+export const CompletedTasks = styled.section`
+  width: 60vw;
+  height: 100vh;
+  margin: 0 auto;
+  border-radius: 0.2rem;
+  padding: 1rem;
 
-li{
+  .previousButton {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5rem;
+    opacity: 50%;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: 0.3s;
+    margin-left: 15%;
 
-background-color:${colors.LightColor};
-box-shadow: .1rem .1rem .5rem #eee;
-justify-content: space-between;
-align-items: center;
-padding: 2rem;
-display: flex;
-width:70%;
-transition:all .2s;
-margin: 0 auto;
-margin-top: 1rem;
-border-radius:1rem;
-position:relative;
-cursor: pointer;
-box-shadow: .2rem .2rem 1rem ${colors.LightColor};
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #000;
+      opacity: 100%;
+    }
+  }
 
-&:hover{
-  transform: scale(1.010);
-}
+  h3 {
+    color: ${colors.PrimaryColor};
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
 
-}
+    & .completedIcon {
+    }
+  }
 
+  li {
+    background-color: ${colors.LightColor};
+    box-shadow: 0.1rem 0.1rem 0.5rem #eee;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    display: flex;
+    width: 70%;
+    transition: all 0.2s;
+    margin: 0 auto;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0.2rem 0.2rem 1rem ${colors.LightColor};
 
+    &:hover {
+      transform: scale(1.01);
+    }
+  }
 `
