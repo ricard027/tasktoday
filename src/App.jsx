@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import TasksCompleted from './components/TasksCompleted'
 import Page404 from './components/Page404'
 
-function App() {
+function App () {
   return (
     <div className="App">
       <BrowserRouter>

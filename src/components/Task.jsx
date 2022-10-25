@@ -1,5 +1,5 @@
 import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
-
+import axios from 'axios'
 // styles
 
 import * as C from './StylesComponents'
@@ -13,6 +13,20 @@ const Task = (props) => {
   // modal
   const activeModal = () => {
     props.modal()
+  }
+
+  // remove
+
+  const HandleRemove = async (id) => {
+    props.fetchTasks()
+    try {
+      await axios.delete(
+          `https://fsc-task-manager-backend.herokuapp.com/tasks/${props.id}`
+      )
+      await props.fetchTasks()
+    } catch (error) {
+      alert('tente novamente')
+    }
   }
 
   // onchange checkbox
@@ -38,7 +52,7 @@ const Task = (props) => {
 
         <AiOutlineDelete
           className="remove"
-          onClick={() => props.remove(props._idj)}
+          onClick={() => HandleRemove()}
         />
 
         {/* remove */}

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { CustomSection, MessageInput } from '../components/StylesComponents'
 import { Link } from 'react-router-dom'
@@ -14,7 +15,7 @@ import * as C from '../components/StylesComponents'
 
 import { GrAdd } from 'react-icons/gr'
 
-function List() {
+function List () {
   const [task, setTask] = useState('')
   const [tasks, setTasks] = useState([])
   const [messageInput, setMessageInput] = useState('')
@@ -70,19 +71,6 @@ function List() {
     try {
       await saveTasks()
     } catch (error) {}
-  }
-
-  // remove
-
-  const HandleRemove = async (id) => {
-    try {
-      await axios.delete(
-        `https://fsc-task-manager-backend.herokuapp.com/tasks/${id}`
-      )
-      await fetchTasks()
-    } catch (error) {
-      console.log('error')
-    }
   }
 
   // modal
@@ -156,9 +144,11 @@ function List() {
         />
       )}
 
-      {tasks.length === 0 ? (
+      {tasks.length === 0
+        ? (
         <img src={image} alt="image tasks empty" />
-      ) : (
+          )
+        : (
         <C.Container>
           {tasks.map((tasks) => (
             <Task
@@ -166,15 +156,15 @@ function List() {
               name={tasks.description}
               key={tasks._id}
               time={tasks.time}
-              id={tasks.id}
-              remove={() => HandleRemove(tasks._id)}
+              id={tasks._id}
+              fetchTasks={fetchTasks}
               modal={() =>
                 handleModal(tasks.task, tasks.id, setNewTime(tasks.time))
               }
             />
           ))}
         </C.Container>
-      )}
+          )}
     </CustomSection>
   )
 }

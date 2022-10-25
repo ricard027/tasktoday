@@ -26,11 +26,13 @@ const TasksCompleted = () => {
       <h3>Completed Tasks</h3>
       <ul>
         {data.map((tasks) =>
-          tasks.iscompleted === true ? (
+          tasks.iscompleted === true
+            ? (
             <li>tasks.description</li>
-          ) : (
+              )
+            : (
             <li>none</li>
-          )
+              )
         )}
       </ul>
     </CompletedTasks>
