@@ -1,5 +1,6 @@
 import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
 import axios from 'axios'
+
 // styles
 
 import * as C from './StylesComponents'
@@ -18,7 +19,6 @@ const Task = (props) => {
   // remove
 
   const HandleRemove = async (id) => {
-    props.fetchTasks()
     try {
       await axios.delete(
           `https://fsc-task-manager-backend.herokuapp.com/tasks/${props.id}`
@@ -31,20 +31,26 @@ const Task = (props) => {
 
   // onchange checkbox
 
-  const onChange = (value) => {
-    props.isCompleted(props)
-    setIsChecked(value)
+  const onChange = async (e) => {
+    console.log(e)
+    setIsChecked(e)
+    try {
+      await axios.patch(`https://fsc-task-manager-backend.herokuapp.com/tasks/${props.id}`, {
+        isCompleted: e
+      })
+      await props.fetchTasks()
+    } catch (error) {}
   }
 
   return (
-    <C.Card key={props.name} done={ischeked}>
+    <C.Card key={props.id} done={ischeked}>
       c
       <input
         type="checkbox"
         checked={ischeked}
         onChange={(e) => onChange(e.target.checked)}
       />
-      <label className="name">{props.name}</label>
+      <label className="name">{props.description}</label>
       <span className="time">{props.time}</span>
       {/* Buttons */}
       <C.ButtonsTask done={ischeked}>

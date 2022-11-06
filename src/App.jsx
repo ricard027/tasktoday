@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import List from './components/List'
 import './styles/global.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'

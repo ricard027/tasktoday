@@ -1,21 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { CompletedTasks } from './StylesComponents'
-
 import axios from 'axios'
+import Task from './Task'
 
 const TasksCompleted = () => {
   // completed
+  const [completedTask, setCompletedTask] = useState([])
 
-  const completedtasks = async () => {
-    const { data } = await axios.get(
-      'https://fsc-task-manager-backend.herokuapp.com/tasks'
-    )
-    return data
+  const getTasksCompleted = async () => {
+    try {
+      const { data } = await axios.get('https://fsc-task-manager-backend.herokuapp.com/tasks')
+      setCompletedTask(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
-
-  const { data } = completedtasks()
+  useEffect(() => {
+    getTasksCompleted()
+  }, [])
 
   return (
     <CompletedTasks>
@@ -25,15 +29,19 @@ const TasksCompleted = () => {
 
       <h3>Completed Tasks</h3>
       <ul>
-        {data.map((tasks) =>
-          tasks.iscompleted === true
-            ? (
-            <li>tasks.description</li>
-              )
-            : (
-            <li>none</li>
-              )
-        )}
+        {
+            completedTask.length === 0
+              ? '<li>loading...</li>'
+              : completedTask.filter((tasks) => tasks.isCompleted === true).map(tasks =>
+             < Task
+             key={tasks._id}
+             id={tasks._id}
+             description={tasks.description}
+             isCompleted={tasks.isCompleted}
+             fetchTasks={getTasksCompleted}
+             />)
+
+         }
       </ul>
     </CompletedTasks>
   )

@@ -97,11 +97,19 @@ button:active .spanButton{
     position:absolute;
     padding:.2rem;
     font-size:.4em;
-    top:-.1rem;
+    top:-.2rem;
     color:#fff;
     border:solid #fff;
-    
+
  }
+ @keyframes animate {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
 
 }
 

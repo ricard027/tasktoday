@@ -37,7 +37,6 @@ function List () {
       const { data } = await axios.get(
         'https://fsc-task-manager-backend.herokuapp.com/tasks'
       )
-
       setTasks(data)
     } catch (error) {
       console.log(error)
@@ -49,27 +48,16 @@ function List () {
   }, [])
 
   const handleTasks = async () => {
-    const newTask = {
-      description: task,
-      id: task._id,
-      time: new Date().toLocaleString('pt-br', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      })
-    }
+    setMessageInput('')
+    setTask('')
 
     if (task.length === 0) {
       setMessageInput('write something!')
       return
     }
-
-    setTasks((prevTasks) => [...prevTasks, newTask])
-    setMessageInput('')
-    setTask('')
-
     try {
       await saveTasks()
+      await fetchTasks()
     } catch (error) {}
   }
 
@@ -95,16 +83,6 @@ function List () {
 
   // completed
 
-  const isCompleted = async (completed) => {
-    try {
-      await axios.patch(
-        `https://fsc-task-manager-backend.herokuapp.com/tasks/${completed._id}`
-      )
-
-      fetchTasks()
-    } catch (error) {}
-  }
-
   // instalar a lib react-toastfy pra adicionar pop ups com menssagens
 
   return (
@@ -129,9 +107,7 @@ function List () {
 
       <Link className="completed" to="/TasksCompleted">
         Completed Tasks
-        <span className={tasks.length === 0 ? 'none' : 'qtdCompleted'}>
-          {tasks.length}
-        </span>
+        <span className={tasks.length === 0 ? 'none' : 'qtdCompleted'}></span>
       </Link>
 
       {modal && (
@@ -150,14 +126,14 @@ function List () {
           )
         : (
         <C.Container>
-          {tasks.map((tasks) => (
+          {tasks.filter(tasks => tasks.isCompleted === false).map((tasks) => (
             <Task
-              isCompleted={isCompleted}
-              name={tasks.description}
+              fetchTasks={fetchTasks}
+              isCompleted={tasks.isCompleted}
+              description={tasks.description}
               key={tasks._id}
               time={tasks.time}
               id={tasks._id}
-              fetchTasks={fetchTasks}
               modal={() =>
                 handleModal(tasks.task, tasks.id, setNewTime(tasks.time))
               }
