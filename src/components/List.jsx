@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 // component
 
-import image from '../img/tasksEmpty.png'
-
+import Loading from './Loading'
 import Task from './Task'
 import Modal from '../components/Modal'
 import * as C from '../components/StylesComponents'
@@ -25,7 +24,7 @@ function List () {
 
   const [newId, setNewId] = useState()
   const [newTime, setNewTime] = useState()
-
+  const [loading, setLoading] = useState(false)
   const saveTasks = async () => {
     await axios.post('https://fsc-task-manager-backend.herokuapp.com/tasks', {
       description: task,
@@ -34,10 +33,13 @@ function List () {
   }
   const fetchTasks = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get(
         'https://fsc-task-manager-backend.herokuapp.com/tasks'
       )
       setTasks(data)
+      setLoading(false)
+      document.querySelector('.spiner').style.display = 'none'
     } catch (error) {
       console.log(error)
     }
@@ -122,7 +124,9 @@ function List () {
 
       {tasks.length === 0
         ? (
-        <img src={image} alt="image tasks empty" />
+        <div className='spiner'>
+          <Loading loading={loading}/>
+        </div>
           )
         : (
         <C.Container>

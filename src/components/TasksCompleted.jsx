@@ -2,17 +2,23 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { CompletedTasks } from './StylesComponents'
+import Loading from './Loading'
 import axios from 'axios'
 import Task from './Task'
 
 const TasksCompleted = () => {
+  const [loading, setLoading] = useState(false)
+
   // completed
   const [completedTask, setCompletedTask] = useState([])
 
   const getTasksCompleted = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get('https://fsc-task-manager-backend.herokuapp.com/tasks')
       setCompletedTask(data)
+      setLoading(false)
+      document.querySelector('.spiner').style.display = 'none'
     } catch (error) {
       console.log(error)
     }
@@ -22,6 +28,7 @@ const TasksCompleted = () => {
   }, [])
 
   return (
+
     <CompletedTasks>
       <Link to="/">
         <AiOutlineArrowLeft className="previousButton" />
@@ -31,7 +38,7 @@ const TasksCompleted = () => {
       <ul>
         {
             completedTask.length === 0
-              ? '<li>loading...</li>'
+              ? <div className='spiner'><Loading loading={loading}/></div>
               : completedTask.filter((tasks) => tasks.isCompleted === true).map(tasks =>
              < Task
              key={tasks._id}
